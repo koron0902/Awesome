@@ -17,6 +17,7 @@ using Android.Support.V7.App;
 namespace awesome.Activities {
 	[Activity(Label = "Post", Theme = "@style/AppTheme.NoActionBar")]
 	public class Post : AppCompatActivity {
+		EditText et_;
 		protected override void OnCreate(Bundle savedInstanceState) {
 			base.OnCreate(savedInstanceState);
 
@@ -26,7 +27,10 @@ namespace awesome.Activities {
 			Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar_post);
 			toolbar.Title = "";
 			SetSupportActionBar(toolbar);
+
+			et_ = FindViewById<EditText>(Resource.Id.comment);
 		}
+
 		public override bool OnCreateOptionsMenu(IMenu menu) {
 			MenuInflater.Inflate(Resource.Menu.menu_post, menu);
 			return true;
@@ -35,6 +39,8 @@ namespace awesome.Activities {
 		public override bool OnOptionsItemSelected(IMenuItem item) {
 			int id = item.ItemId;
 			if(id == Resource.Id.menu_posting) {
+				SetResult(Result.Ok,
+					new Intent().PutExtra("POSTED_COMMENT", et_.Text));
 				Finish();
 				return true;
 			}
