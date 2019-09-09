@@ -27,6 +27,8 @@ namespace awesome.Activities {
 			Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar_post);
 			toolbar.Title = "";
 			SetSupportActionBar(toolbar);
+			SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_mtrl_chip_close_circle);
+			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
 			et_ = FindViewById<EditText>(Resource.Id.comment);
 		}
@@ -34,6 +36,12 @@ namespace awesome.Activities {
 		public override bool OnCreateOptionsMenu(IMenu menu) {
 			MenuInflater.Inflate(Resource.Menu.menu_post, menu);
 			return true;
+		}
+
+		public override bool OnSupportNavigateUp() {
+			SetResult(Result.Canceled);
+			Finish();
+			return base.OnSupportNavigateUp();
 		}
 
 		public override bool OnOptionsItemSelected(IMenuItem item) {
