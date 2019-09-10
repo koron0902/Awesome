@@ -31,6 +31,12 @@ namespace awesome.Activities {
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
 			et_ = FindViewById<EditText>(Resource.Id.comment);
+
+			FindViewById<Button>(Resource.Id.postButton).Click += (sender, e) => {
+				SetResult(Result.Ok,
+					new Intent().PutExtra("POSTED_COMMENT", et_.Text));
+				Finish();
+			};
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu) {
@@ -46,12 +52,6 @@ namespace awesome.Activities {
 
 		public override bool OnOptionsItemSelected(IMenuItem item) {
 			int id = item.ItemId;
-			if(id == Resource.Id.menu_posting) {
-				SetResult(Result.Ok,
-					new Intent().PutExtra("POSTED_COMMENT", et_.Text));
-				Finish();
-				return true;
-			}
 
 			return base.OnOptionsItemSelected(item);
 		}

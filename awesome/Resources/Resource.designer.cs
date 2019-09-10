@@ -3205,10 +3205,13 @@ namespace awesome
 			public const int posting = 2131165300;
 			
 			// aapt resource value: 0x7F070075
-			public const int tooltip_frame_dark = 2131165301;
+			public const int radiusButton = 2131165301;
 			
 			// aapt resource value: 0x7F070076
-			public const int tooltip_frame_light = 2131165302;
+			public const int tooltip_frame_dark = 2131165302;
+			
+			// aapt resource value: 0x7F070077
+			public const int tooltip_frame_light = 2131165303;
 			
 			static Drawable()
 			{
@@ -3506,64 +3509,64 @@ namespace awesome
 			public const int masked = 2131230816;
 			
 			// aapt resource value: 0x7F080061
-			public const int menu_posting = 2131230817;
-			
-			// aapt resource value: 0x7F080062
-			public const int message = 2131230818;
+			public const int message = 2131230817;
 			
 			// aapt resource value: 0x7F080003
 			public const int META = 2131230723;
 			
+			// aapt resource value: 0x7F080062
+			public const int middle = 2131230818;
+			
 			// aapt resource value: 0x7F080063
-			public const int middle = 2131230819;
+			public const int mini = 2131230819;
 			
 			// aapt resource value: 0x7F080064
-			public const int mini = 2131230820;
+			public const int mtrl_child_content_container = 2131230820;
 			
 			// aapt resource value: 0x7F080065
-			public const int mtrl_child_content_container = 2131230821;
+			public const int mtrl_internal_children_alpha_tag = 2131230821;
 			
 			// aapt resource value: 0x7F080066
-			public const int mtrl_internal_children_alpha_tag = 2131230822;
+			public const int multiply = 2131230822;
 			
 			// aapt resource value: 0x7F080067
-			public const int multiply = 2131230823;
+			public const int navigation_header_container = 2131230823;
 			
 			// aapt resource value: 0x7F080068
-			public const int navigation_header_container = 2131230824;
+			public const int never = 2131230824;
 			
 			// aapt resource value: 0x7F080069
-			public const int never = 2131230825;
+			public const int none = 2131230825;
 			
 			// aapt resource value: 0x7F08006A
-			public const int none = 2131230826;
+			public const int normal = 2131230826;
 			
 			// aapt resource value: 0x7F08006B
-			public const int normal = 2131230827;
+			public const int notification_background = 2131230827;
 			
 			// aapt resource value: 0x7F08006C
-			public const int notification_background = 2131230828;
+			public const int notification_main_column = 2131230828;
 			
 			// aapt resource value: 0x7F08006D
-			public const int notification_main_column = 2131230829;
+			public const int notification_main_column_container = 2131230829;
 			
 			// aapt resource value: 0x7F08006E
-			public const int notification_main_column_container = 2131230830;
+			public const int outline = 2131230830;
 			
 			// aapt resource value: 0x7F08006F
-			public const int outline = 2131230831;
+			public const int parallax = 2131230831;
 			
 			// aapt resource value: 0x7F080070
-			public const int parallax = 2131230832;
+			public const int parentPanel = 2131230832;
 			
 			// aapt resource value: 0x7F080071
-			public const int parentPanel = 2131230833;
+			public const int parent_matrix = 2131230833;
 			
 			// aapt resource value: 0x7F080072
-			public const int parent_matrix = 2131230834;
+			public const int pin = 2131230834;
 			
 			// aapt resource value: 0x7F080073
-			public const int pin = 2131230835;
+			public const int postButton = 2131230835;
 			
 			// aapt resource value: 0x7F080074
 			public const int progress_circular = 2131230836;
