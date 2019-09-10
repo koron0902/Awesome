@@ -44,9 +44,8 @@ namespace awesome {
 			base.OnActivityResult(requestCode, resultCode, data);
 			if(requestCode == POST_REQUEST_CODE_) {
 				if(resultCode == Result.Ok) {
-					Toast.MakeText(ApplicationContext,
-						data.GetStringExtra("POSTED_COMMENT"),
-						ToastLength.Short).Show();
+					var posted = data.GetStringExtra("POSTED_COMMENT");
+					var now = DateTime.Now.ToLocalTime().ToString("HH:mm:ss");
 				}
 			}
 
