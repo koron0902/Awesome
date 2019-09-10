@@ -1,5 +1,6 @@
 ﻿using System;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
@@ -10,6 +11,7 @@ using Android.Widget;
 namespace awesome {
 	[Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
 	public class MainActivity : AppCompatActivity {
+		static readonly int POST_REQUEST_CODE_ = 0x01;
 
 		protected override void OnCreate(Bundle savedInstanceState) {
 			base.OnCreate(savedInstanceState);
@@ -20,7 +22,7 @@ namespace awesome {
 			SetSupportActionBar(toolbar);
 
 			FindViewById<FloatingActionButton>(Resource.Id.fab).Click += (sender, e)=>{
-				StartActivity(new Android.Content.Intent(ApplicationContext, typeof(Activities.Post)));
+				StartActivityForResult(new Android.Content.Intent(ApplicationContext, typeof(Activities.Post)), POST_REQUEST_CODE_);
 			};
 		}
 
@@ -36,6 +38,18 @@ namespace awesome {
 			}
 
 			return base.OnOptionsItemSelected(item);
+		}
+
+		protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data) {
+			base.OnActivityResult(requestCode, resultCode, data);
+			if(requestCode == POST_REQUEST_CODE_) {
+				if(resultCode == Result.Ok) {
+					Toast.MakeText(ApplicationContext,
+						data.GetStringExtra("POSTED_COMMENT"),
+						ToastLength.Short).Show();
+				}
+			}
+
 		}
 
 		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults) {
