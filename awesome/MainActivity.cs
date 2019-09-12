@@ -61,6 +61,8 @@ namespace awesome {
 				if(resultCode == Result.Ok) {
 					var posted = data.GetStringExtra("POSTED_COMMENT");
 					var now = DateTime.Now.ToLocalTime().ToString("HH:mm:ss");
+					rows_.Add(new Model.timeLineRow(now, posted));
+					adapter_.NotifyDataSetChanged();
 				}
 			}
 
