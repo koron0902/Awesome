@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content">
 <TextView
 		android:id="@+id/postedTime"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
 		android:layout_marginLeft="30dp"
+		android:layout_marginVertical="5dp"
 		android:layout_centerVertical="true"
-		android:text="00:00"
-		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:text="00:00:00"
+		android:textAppearance="?android:attr/textAppearanceSmall"
 		android:textColor="@color/material_grey_600"/>
 <TextView
 		android:id="@+id/postedComment"
@@ -18,11 +19,11 @@
     android:layout_height="wrap_content"
 		android:layout_marginRight="50dp"
 		android:layout_marginLeft="30px"
+		android:layout_marginVertical="5dp"
 		android:layout_toRightOf="@id/postedTime"
 		android:layout_centerVertical="true"
-		android:paddingLeft="13dp"
-		android:paddingRight="5dp"
+		android:paddingHorizontal="8dp"
 		android:text="あいうえおかきくけこさしすせそたちつてと"
-		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:textAppearance="?android:attr/textAppearanceMedium"
 		android:background="@drawable/textborder"/>
 </RelativeLayout>
