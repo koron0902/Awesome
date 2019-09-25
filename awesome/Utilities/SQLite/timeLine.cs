@@ -67,5 +67,9 @@ namespace awesome.Utilities.SQLite {
 			return row_;
 			//return str;
 		}
+
+		/// TODO:
+		/// Search系の関数を実装する．
+		/// Searchキーとしてのenumも実装の必要あり．
 	}
 }

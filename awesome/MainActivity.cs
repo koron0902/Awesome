@@ -65,6 +65,9 @@ namespace awesome {
 			base.OnActivityResult(requestCode, resultCode, data);
 			if(requestCode == POST_REQUEST_CODE_) {
 				if(resultCode == Result.Ok) {
+					///  TODO:
+					///  そのうちサーバにプッシュしてグローバルIDを取得するようにする．
+					///  IntentServiceあたりでいいかな．
 					var posted = data.GetStringExtra("POSTED_COMMENT");
 					var now = DateTime.Now.ToLocalTime().ToString("HH:mm:ss");
           
