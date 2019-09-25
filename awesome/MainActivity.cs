@@ -33,7 +33,13 @@ namespace awesome {
 
 			timeLine_ = new Utilities.SQLite.TimeLine(ApplicationContext);
 			var recycler = FindViewById<RecyclerView>(Resource.Id.timeLine);
-     rows_ = new List<Utilities.Model.UI.timeLineRow>();
+
+			/// TODO:
+			/// onCreate()で重い処理を実行することは
+			/// 起動時間的にも懸念事項となるので将来的に
+			/// は別のところで実行をする．
+			rows_ = new List<Utilities.Model.UI.timeLineRow>();
+			rows_.AddRange(timeLine_.read());
 			adapter_ = new Adapter.timeLine(rows_);
 			manager_ = new LinearLayoutManager(this);
 			recycler.HasFixedSize = false;
