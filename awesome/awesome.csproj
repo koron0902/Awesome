@@ -64,6 +64,9 @@
     <Compile Include="Activities\Post.cs" />
     <Compile Include="Utilities\Model\SQLite\timeLine.cs" />
     <Compile Include="Utilities\SQLite\timeLine.cs" />
+    <Compile Include="Model\timeLineRow.cs" />
+    <Compile Include="ViewHolder\timeLine.cs" />
+    <Compile Include="Adapter\timeLine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -116,6 +119,14 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\card.axml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\textBorder.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
@@ -130,6 +141,9 @@
     <Folder Include="Utilities\Model\" />
     <Folder Include="Utilities\Model\SQLite\" />
     <Folder Include="Utilities\SQLite\" />
+    <Folder Include="Adapter\" />
+    <Folder Include="Model\" />
+    <Folder Include="ViewHolder\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
