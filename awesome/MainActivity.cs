@@ -15,7 +15,7 @@ namespace awesome {
 	public class MainActivity : AppCompatActivity {
 		static readonly int POST_REQUEST_CODE_ = 0x01;
 		Utilities.SQLite.TimeLine timeLine_;
-		List<Model.timeLineRow> rows_;
+		List<Model.UI.timeLineRow> rows_;
 		Adapter.timeLine adapter_;
 		LinearLayoutManager manager_;
 
@@ -33,9 +33,9 @@ namespace awesome {
 
 			timeLine_ = new Utilities.SQLite.TimeLine(ApplicationContext);
 			var recycler = FindViewById<RecyclerView>(Resource.Id.timeLine);
-			rows_ = new List<Model.timeLineRow>();
-			rows_.Add(new Model.timeLineRow("01:23:45", "にゃ〜ん"));
-			rows_.Add(new Model.timeLineRow("12:34:56", "こゃ〜ん"));
+			rows_ = new List<Model.UI.timeLineRow>();
+			rows_.Add(new Model.UI.timeLineRow("01:23:45", "にゃ〜ん"));
+			rows_.Add(new Model.UI.timeLineRow("12:34:56", "こゃ〜ん"));
 			adapter_ = new Adapter.timeLine(rows_);
 			manager_ = new LinearLayoutManager(this);
 			recycler.HasFixedSize = false;
@@ -71,7 +71,7 @@ namespace awesome {
 
 					timeLine_.write(column);
           
-					rows_.Add(new Model.timeLineRow(now, posted));
+					rows_.Add(new Model.UI.timeLineRow(now, posted));
 					adapter_.NotifyDataSetChanged();
           
 				}

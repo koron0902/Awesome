@@ -64,9 +64,9 @@
     <Compile Include="Activities\Post.cs" />
     <Compile Include="Utilities\Model\SQLite\timeLine.cs" />
     <Compile Include="Utilities\SQLite\timeLine.cs" />
-    <Compile Include="Model\timeLineRow.cs" />
     <Compile Include="ViewHolder\timeLine.cs" />
     <Compile Include="Adapter\timeLine.cs" />
+    <Compile Include="Utilities\Model\UI\timeLineRow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -142,8 +142,8 @@
     <Folder Include="Utilities\Model\SQLite\" />
     <Folder Include="Utilities\SQLite\" />
     <Folder Include="Adapter\" />
-    <Folder Include="Model\" />
     <Folder Include="ViewHolder\" />
+    <Folder Include="Utilities\Model\UI\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

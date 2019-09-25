@@ -1,5 +1,5 @@
 ﻿using System;
-namespace awesome.Model {
+namespace awesome.Model.UI {
 	public class timeLineRow {
 		public string createdAt_ { get; private set; }
 		public string content_ { get; private set; }
