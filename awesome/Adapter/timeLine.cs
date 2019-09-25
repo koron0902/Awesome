@@ -5,8 +5,8 @@ using Android.Views;
 
 namespace awesome.Adapter {
 	public class timeLine : RecyclerView.Adapter {
-		List<awesome.Model.UI.timeLineRow> rows_;
-		public timeLine(List<Model.UI.timeLineRow> _rows) {
+		List<awesome.Utilities.Model.UI.timeLineRow> rows_;
+		public timeLine(List<Utilities.Model.UI.timeLineRow> _rows) {
 			rows_ = _rows;
 		}
 
