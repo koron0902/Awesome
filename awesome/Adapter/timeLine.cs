@@ -15,6 +15,9 @@ namespace awesome.Adapter {
 		public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 			((ViewHolder.timeLine)(holder)).created_.Text = rows_[position].createdAt_;
 			((ViewHolder.timeLine)(holder)).content_.Text = rows_[position].content_;
+			((ViewHolder.timeLine)(holder)).content_.Click += (sender, e) => {
+				((Android.Widget.TextView)sender).Enabled = false;
+			};
 		}
 
 		public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
