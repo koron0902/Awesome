@@ -1,6 +1,5 @@
-﻿
-using System;
-
+﻿using System;
+using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -43,12 +42,13 @@ namespace awesome.Utilities.SQLite {
 			db.Insert(timelineModel_.tableName_, null, timelineModel_.insertEntry(_column));
 		}
 
-		public string read() {
+		public List<Utilities.Model.UI.timeLineRow> read() {
 			var db = ReadableDatabase;
 			var cursor = db.Query(timelineModel_.tableName_,
 				new string[] {
 					Model.SQLite.TimeLine.HEADER.name_,
-					Model.SQLite.TimeLine.HEADER.text_ },
+					Model.SQLite.TimeLine.HEADER.text_,
+					Model.SQLite.TimeLine.HEADER.time_},
 				null,
 				null,
 				null,
@@ -56,15 +56,16 @@ namespace awesome.Utilities.SQLite {
 				null);
 
 
-			var str = "";
+			List<Model.UI.timeLineRow> row_ = new List<Model.UI.timeLineRow>();
 			cursor.MoveToFirst();
 			for(var i = 0;i < cursor.Count; i++) {
-				str += cursor.GetString(0) + " : " + cursor.GetString(1) + "\n";
+				row_.Add(new Model.UI.timeLineRow(cursor.GetString(2), cursor.GetString(1)));
 				cursor.MoveToNext();
 			}
 			cursor.Close();
 
-			return str;
+			return row_;
+			//return str;
 		}
 	}
 }
