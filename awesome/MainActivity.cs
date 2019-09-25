@@ -14,6 +14,7 @@ namespace awesome {
 	[Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
 	public class MainActivity : AppCompatActivity {
 		static readonly int POST_REQUEST_CODE_ = 0x01;
+		Utilities.SQLite.TimeLine timeLine_;
 		List<Model.timeLineRow> rows_;
 		Adapter.timeLine adapter_;
 		LinearLayoutManager manager_;
@@ -26,10 +27,11 @@ namespace awesome {
 			Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
 			SetSupportActionBar(toolbar);
 
-			FindViewById<FloatingActionButton>(Resource.Id.fab).Click += (sender, e)=>{
+			FindViewById<FloatingActionButton>(Resource.Id.fab).Click += (sender, e) => {
 				StartActivityForResult(new Android.Content.Intent(ApplicationContext, typeof(Activities.Post)), POST_REQUEST_CODE_);
 			};
 
+			timeLine_ = new Utilities.SQLite.TimeLine(ApplicationContext);
 			var recycler = FindViewById<RecyclerView>(Resource.Id.timeLine);
 			rows_ = new List<Model.timeLineRow>();
 			rows_.Add(new Model.timeLineRow("01:23:45", "にゃ〜ん"));
@@ -61,8 +63,17 @@ namespace awesome {
 				if(resultCode == Result.Ok) {
 					var posted = data.GetStringExtra("POSTED_COMMENT");
 					var now = DateTime.Now.ToLocalTime().ToString("HH:mm:ss");
+          
+					Utilities.Model.SQLite.TimeLine.column column = new Utilities.Model.SQLite.TimeLine.column();
+					column.name_ = "adad";
+					column.text_ = posted;
+					column.time_ = now;
+
+					timeLine_.write(column);
+          
 					rows_.Add(new Model.timeLineRow(now, posted));
 					adapter_.NotifyDataSetChanged();
+          
 				}
 			}
 
@@ -75,4 +86,3 @@ namespace awesome {
 		}
 	}
 }
-
