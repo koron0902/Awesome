@@ -5,13 +5,18 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using System.Collections.Generic;
 
 namespace awesome {
 	[Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
 	public class MainActivity : AppCompatActivity {
 		static readonly int POST_REQUEST_CODE_ = 0x01;
+		List<Model.timeLineRow> rows_;
+		Adapter.timeLine adapter_;
+		LinearLayoutManager manager_;
 
 		protected override void OnCreate(Bundle savedInstanceState) {
 			base.OnCreate(savedInstanceState);
@@ -24,6 +29,16 @@ namespace awesome {
 			FindViewById<FloatingActionButton>(Resource.Id.fab).Click += (sender, e)=>{
 				StartActivityForResult(new Android.Content.Intent(ApplicationContext, typeof(Activities.Post)), POST_REQUEST_CODE_);
 			};
+
+			var recycler = FindViewById<RecyclerView>(Resource.Id.timeLine);
+			rows_ = new List<Model.timeLineRow>();
+			rows_.Add(new Model.timeLineRow("01:23:45", "にゃ〜ん"));
+			rows_.Add(new Model.timeLineRow("12:34:56", "こゃ〜ん"));
+			adapter_ = new Adapter.timeLine(rows_);
+			manager_ = new LinearLayoutManager(this);
+			recycler.HasFixedSize = false;
+			recycler.SetLayoutManager(manager_);
+			recycler.SetAdapter(adapter_);
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu) {
@@ -46,6 +61,8 @@ namespace awesome {
 				if(resultCode == Result.Ok) {
 					var posted = data.GetStringExtra("POSTED_COMMENT");
 					var now = DateTime.Now.ToLocalTime().ToString("HH:mm:ss");
+					rows_.Add(new Model.timeLineRow(now, posted));
+					adapter_.NotifyDataSetChanged();
 				}
 			}
 
