@@ -18,6 +18,9 @@ namespace awesome.Fragment {
 		Java.Util.Calendar calendar_;
 		DatePickerDialog datePicker_;
 		Context context_;
+
+		public Action<DatePickerDialog.DateSetEventArgs> onDataSelectChanged;
+
 		public Calendar(Context _context) {
 			context_ = _context;
 		}
@@ -36,6 +39,7 @@ namespace awesome.Fragment {
 			datePicker_ = new DatePickerDialog(context_);
 			datePicker_.DateSet += (sender, e) => {
 				var str = e.Date.ToLocalTime().ToString("YYYY-MM-DD HH:mm:ss");
+				onDataSelectChanged(e);
 			};
 			calendar_.Get(Java.Util.CalendarField.Year);
 			calendar_.Get(Java.Util.CalendarField.Month);
