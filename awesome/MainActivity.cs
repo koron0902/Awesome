@@ -25,6 +25,7 @@ namespace awesome {
 			SetContentView(Resource.Layout.activity_main);
 
 			Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+			toolbar.Title = "";
 			SetSupportActionBar(toolbar);
 
 			FindViewById<FloatingActionButton>(Resource.Id.fab).Click += (sender, e) => {
@@ -45,6 +46,16 @@ namespace awesome {
 			recycler.HasFixedSize = false;
 			recycler.SetLayoutManager(manager_);
 			recycler.SetAdapter(adapter_);
+
+			FindViewById<RelativeLayout>(Resource.Id.date).Click += (sender, e) => {
+				var c = new Fragment.Calendar(this);
+				if(c != null) {
+					var manager = this.FragmentManager;
+					if(manager != null) {
+						c.Show(manager, "aaa");
+					}
+				}
+			};
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu) {
@@ -80,7 +91,6 @@ namespace awesome {
           
 					rows_.Add(new Utilities.Model.UI.timeLineRow(now, posted));
 					adapter_.NotifyDataSetChanged();
-          
 				}
 			}
 
