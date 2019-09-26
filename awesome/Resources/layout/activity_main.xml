@@ -14,7 +14,35 @@
 			android:layout_width="match_parent"
 			android:layout_height="?attr/actionBarSize"
 			android:background="?attr/colorPrimary"
-			app:popupTheme="@style/AppTheme.PopupOverlay" />
+			app:popupTheme="@style/AppTheme.PopupOverlay">
+			<RelativeLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/date">
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/year"
+					android:text="2019年"
+					/>
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/year"
+					android:id="@+id/month"
+					android:text="09月"
+					android:textAppearance="?android:attr/textAppearanceMedium"/>
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_toRightOf="@id/month"
+					android:layout_below="@id/year"
+					android:id="@+id/day"
+					android:text="22日"
+					android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+			</RelativeLayout>
+		</android.support.v7.widget.Toolbar>
 	</android.support.design.widget.AppBarLayout>
 	<android.support.v7.widget.RecyclerView
 		android:id="@+id/timeLine"

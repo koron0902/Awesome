@@ -18,6 +18,7 @@ namespace awesome {
 		List<Utilities.Model.UI.timeLineRow> rows_;
 		Adapter.timeLine adapter_;
 		LinearLayoutManager manager_;
+		DateTime dateTime_;
 
 		protected override void OnCreate(Bundle savedInstanceState) {
 			base.OnCreate(savedInstanceState);
@@ -25,6 +26,7 @@ namespace awesome {
 			SetContentView(Resource.Layout.activity_main);
 
 			Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+			toolbar.Title = "";
 			SetSupportActionBar(toolbar);
 
 			FindViewById<FloatingActionButton>(Resource.Id.fab).Click += (sender, e) => {
@@ -45,6 +47,24 @@ namespace awesome {
 			recycler.HasFixedSize = false;
 			recycler.SetLayoutManager(manager_);
 			recycler.SetAdapter(adapter_);
+
+			dateTime_ = new DateTime(DateTime.Now.Millisecond);
+
+			FindViewById<RelativeLayout>(Resource.Id.date).Click += (sender, e) => {
+				var c = new Fragment.Calendar(this);
+				c.onDataSelectChanged += (e2) => {
+					dateTime_ = e2.Date;
+					FindViewById<TextView>(Resource.Id.year).Text = dateTime_.Year.ToString("D4") + "年";
+					FindViewById<TextView>(Resource.Id.month).Text = dateTime_.Month.ToString("D2") + "月";
+					FindViewById<TextView>(Resource.Id.day).Text = dateTime_.Day.ToString("D2") + "日";
+				};
+				if(c != null) {
+					var manager = this.FragmentManager;
+					if(manager != null) {
+						c.Show(manager, "aaa");
+					}
+				}
+			};
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu) {
@@ -80,7 +100,6 @@ namespace awesome {
           
 					rows_.Add(new Utilities.Model.UI.timeLineRow(now, posted));
 					adapter_.NotifyDataSetChanged();
-          
 				}
 			}
 
