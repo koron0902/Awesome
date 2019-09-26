@@ -30,7 +30,56 @@ namespace awesome.Adapter {
 			((ViewHolder.timeLine)(holder)).created_.Text = rows_[position].createdAt_;
 			((ViewHolder.timeLine)(holder)).content_.Text = rows_[position].content_;
 			((ViewHolder.timeLine)(holder)).content_.Click += (sender, e) => {
+				TableLayout tableLayout = new TableLayout(activity_.ApplicationContext);
+				tableLayout.SetGravity(GravityFlags.Bottom | GravityFlags.CenterHorizontal);
+				tableLayout.SetBackgroundColor(Color.Argb(100, 160, 160, 160));
+				activity_.AddContentView(tableLayout,
+					new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent,
+							ViewGroup.LayoutParams.MatchParent));
+
+
+				WindowManagerLayoutParams layoutParams = new WindowManagerLayoutParams(
+					600,
+					600,
+					WindowManagerTypes.SystemOverlay,
+					WindowManagerFlags.NotTouchable |
+					WindowManagerFlags.NotFocusable,
+					Android.Graphics.Format.Translucent);
+				ImageView imageView = new ImageView(activity_.ApplicationContext);
+				imageView.SetImageResource(awesome.Resource.Drawable.met);
+				imageView.SetPadding(0, 0, 0, 50);
+
+
+
+				tableLayout.AddView(imageView, layoutParams);
+				var upAnimation = new Utilities.Animation.Horizontal()
+																			.StartPos(imageView.GetX(),
+																								imageView.GetY())
+																			.MoveDistance(-80)
+																			.Duration(100)
+																			.Build();
+				var downAnimation = new Utilities.Animation.Horizontal()
+																			.StartPos(imageView.GetX(),
+																								imageView.GetY() - 80)
+																			.MoveDistance(80)
+																			.Duration(100)
+																			.Build();
+				imageView.StartAnimation(upAnimation);
+				upAnimation.AnimationEnd += (_1, _2) => {
+					imageView.StartAnimation(downAnimation);
+				};
+
+				downAnimation.AnimationEnd += (_1, _2) => {
+					imageView.StartAnimation(upAnimation);
+				};
+
+
 				((Android.Widget.TextView)sender).Enabled = false;
+
+
+				new Handler().PostDelayed(() => {
+					((ViewGroup)tableLayout.Parent).RemoveView(tableLayout);
+				}, 500);
 			};
 		}
 
