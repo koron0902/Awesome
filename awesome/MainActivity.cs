@@ -40,7 +40,7 @@ namespace awesome {
 			/// は別のところで実行をする．
 			rows_ = new List<Utilities.Model.UI.timeLineRow>();
 			rows_.AddRange(timeLine_.read());
-			adapter_ = new Adapter.timeLine(rows_);
+			adapter_ = new Adapter.timeLine(this, rows_);
 			manager_ = new LinearLayoutManager(this);
 			recycler.HasFixedSize = false;
 			recycler.SetLayoutManager(manager_);
