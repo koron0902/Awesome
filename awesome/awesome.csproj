@@ -68,6 +68,7 @@
     <Compile Include="Adapter\timeLine.cs" />
     <Compile Include="Utilities\Model\UI\timeLineRow.cs" />
     <Compile Include="Utilities\Animation\Horizontal.cs" />
+    <Compile Include="Fragment\Calendar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -150,6 +151,7 @@
     <Folder Include="ViewHolder\" />
     <Folder Include="Utilities\Model\UI\" />
     <Folder Include="Utilities\Animation\" />
+    <Folder Include="Fragment\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
