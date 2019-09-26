@@ -29,6 +29,7 @@ namespace awesome.Adapter {
 		public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 			((ViewHolder.timeLine)(holder)).created_.Text = rows_[position].createdAt_;
 			((ViewHolder.timeLine)(holder)).content_.Text = rows_[position].content_;
+			((ViewHolder.timeLine)(holder)).content_.Enabled = rows_[position].enabled;
 			((ViewHolder.timeLine)(holder)).content_.Click += (sender, e) => {
 				TableLayout tableLayout = new TableLayout(activity_.ApplicationContext);
 				tableLayout.SetGravity(GravityFlags.Bottom | GravityFlags.CenterHorizontal);
@@ -75,6 +76,7 @@ namespace awesome.Adapter {
 
 
 				((Android.Widget.TextView)sender).Enabled = false;
+				rows_[position].enabled = false;
 
 
 				new Handler().PostDelayed(() => {

@@ -8,6 +8,7 @@ namespace awesome.ViewHolder {
 	public class timeLine: RecyclerView.ViewHolder {
 		public TextView created_;
 		public TextView content_;
+		public bool enabled = true;
 
 		public timeLine(View itemView) : base(itemView) {
 			created_ = itemView.FindViewById<TextView>(Resource.Id.postedTime);
