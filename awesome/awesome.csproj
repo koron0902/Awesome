@@ -67,6 +67,7 @@
     <Compile Include="ViewHolder\timeLine.cs" />
     <Compile Include="Adapter\timeLine.cs" />
     <Compile Include="Utilities\Model\UI\timeLineRow.cs" />
+    <Compile Include="Utilities\Animation\Horizontal.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -127,6 +128,10 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\drawable\met.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
@@ -144,6 +149,7 @@
     <Folder Include="Adapter\" />
     <Folder Include="ViewHolder\" />
     <Folder Include="Utilities\Model\UI\" />
+    <Folder Include="Utilities\Animation\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
