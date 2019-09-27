@@ -104,9 +104,11 @@ namespace awesome {
 					column.time_ = dateTime;
 
 					timeLine_.write(column);
-          
-					rows_.Add(new Utilities.Model.UI.timeLineRow(column.time_, column.text_));
-					adapter_.NotifyDataSetChanged();
+
+					if (dateTime.Split(' ')[0] == dateTime_.Date.ToString("yyyy-MM-dd")){
+						rows_.Add(new Utilities.Model.UI.timeLineRow(column.time_, column.text_));
+						adapter_.NotifyDataSetChanged();
+					}
 				}
 			}
 
