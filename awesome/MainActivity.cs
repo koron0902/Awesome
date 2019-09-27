@@ -102,6 +102,7 @@ namespace awesome {
 					column.name_ = "adad";
 					column.text_ = posted;
 					column.time_ = dateTime;
+					column.enabled_ = true.ToString();
 
 					timeLine_.write(column);
 

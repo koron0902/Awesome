@@ -9,7 +9,7 @@ using Android.Runtime;
 
 namespace awesome.Utilities.SQLite {
 	public class TimeLine : SQLiteOpenHelper {
-		private static int databaseVersion_ => 3;
+		private static int databaseVersion_ => 4;
 		private static string databaseName_ => "Awesome.db";
 		private Model.SQLite.TimeLine timelineModel_;
 
@@ -50,7 +50,9 @@ namespace awesome.Utilities.SQLite {
 				new string[] {
 					Model.SQLite.TimeLine.HEADER.name_,
 					Model.SQLite.TimeLine.HEADER.text_,
-					Model.SQLite.TimeLine.HEADER.time_},
+					Model.SQLite.TimeLine.HEADER.time_,
+					Model.SQLite.TimeLine.HEADER.localId_,
+					Model.SQLite.TimeLine.HEADER.enabled_},
 				null,
 				null,
 				null,
@@ -61,7 +63,7 @@ namespace awesome.Utilities.SQLite {
 			List<Model.UI.timeLineRow> row_ = new List<Model.UI.timeLineRow>();
 			cursor.MoveToFirst();
 			for(var i = 0;i < cursor.Count; i++) {
-				row_.Add(new Model.UI.timeLineRow(cursor.GetString(2), cursor.GetString(1)));
+				row_.Add(new Model.UI.timeLineRow(cursor.GetString(2), cursor.GetString(1), cursor.GetInt(3), bool.Parse(cursor.GetString(4))));
 				cursor.MoveToNext();
 			}
 			cursor.Close();
@@ -97,7 +99,9 @@ namespace awesome.Utilities.SQLite {
 				new string[] {
 					Model.SQLite.TimeLine.HEADER.name_,
 					Model.SQLite.TimeLine.HEADER.text_,
-					Model.SQLite.TimeLine.HEADER.time_},
+					Model.SQLite.TimeLine.HEADER.time_,
+					Model.SQLite.TimeLine.HEADER.localId_,
+					Model.SQLite.TimeLine.HEADER.enabled_},
 				query,
 				dataSet.Count == 0 ? null : dataSet.ToArray(),
 				null,
@@ -108,7 +112,7 @@ namespace awesome.Utilities.SQLite {
 			List<Model.UI.timeLineRow> row_ = new List<Model.UI.timeLineRow>();
 			cursor.MoveToFirst();
 			for(var i = 0;i < cursor.Count;i++) {
-				row_.Add(new Model.UI.timeLineRow(cursor.GetString(2), cursor.GetString(1)));
+				row_.Add(new Model.UI.timeLineRow(cursor.GetString(2), cursor.GetString(1), cursor.GetInt(3), bool.Parse(cursor.GetString(4))));
 				cursor.MoveToNext();
 			}
 			cursor.Close();

@@ -10,6 +10,7 @@ namespace awesome.Utilities.Model.SQLite {
 			public string name_;
 			public string time_;
 			public string text_;
+			public string enabled_;
 		}
 
 		public static column HEADER;
@@ -20,7 +21,8 @@ namespace awesome.Utilities.Model.SQLite {
 				localId_ = "lId",
 				name_ = "Name",
 				text_ = "Text",
-				time_ = "Time"
+				time_ = "Time",
+				enabled_ = "Enabled"
 			};
 		}
 
@@ -30,15 +32,17 @@ namespace awesome.Utilities.Model.SQLite {
 				HEADER.localId_+ " integer primary key autoincrement," +
 				HEADER.name_ + " text," +
 				HEADER.time_ + " text," +
-				HEADER.text_ + " text)";
+				HEADER.text_ + " text," +
+				HEADER.enabled_ + " text)";
 		}
 
 		public ContentValues insertEntry(column _column) {
 			ContentValues values = new ContentValues();
 			values.Put("gId", _column.globalId_);
-			values.Put("name", _column.name_);
-			values.Put("time", _column.time_);
-			values.Put("text", _column.text_);
+			values.Put("Name", _column.name_);
+			values.Put("Time", _column.time_);
+			values.Put("Text", _column.text_);
+			values.Put("Enabled", _column.enabled_);
 
 			return values;
 		}
