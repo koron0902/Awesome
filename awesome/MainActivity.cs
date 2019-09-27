@@ -84,6 +84,18 @@ namespace awesome {
 			};
 		}
 
+		protected override void OnPause() {
+			foreach(var row in rows_) {
+				Utilities.Model.SQLite.TimeLine.column column = new Utilities.Model.SQLite.TimeLine.column();
+				column.localId_ = row.localId.ToString();
+				column.enabled_ = row.enabled.ToString();
+				column.time_ = row.createdAt_;
+				column.text_ = row.content_;
+				timeLine_.update(column);
+			}
+			base.OnPause();
+		}
+
 		public override bool OnCreateOptionsMenu(IMenu menu) {
 			MenuInflater.Inflate(Resource.Menu.menu_main, menu);
 			return true;
