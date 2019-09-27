@@ -57,15 +57,7 @@ namespace awesome {
 			FindViewById<RelativeLayout>(Resource.Id.date).Click += (sender, e) => {
 				var c = new Fragment.Calendar(this);
 				c.onDataSelectChanged += (e2) => {
-
-					foreach(var row in rows_) {
-						Utilities.Model.SQLite.TimeLine.column column = new Utilities.Model.SQLite.TimeLine.column();
-						column.localId_ = row.localId.ToString();
-						column.enabled_ = row.enabled.ToString();
-						column.time_ = row.createdAt_;
-						column.text_ = row.content_;
-						timeLine_.update(column);
-					}
+					timeLine_.update(rows_);
 
 					dateTime_ = e2.Date;
 					FindViewById<TextView>(Resource.Id.year).Text = dateTime_.Year.ToString("D4") + "年";
@@ -85,14 +77,7 @@ namespace awesome {
 		}
 
 		protected override void OnPause() {
-			foreach(var row in rows_) {
-				Utilities.Model.SQLite.TimeLine.column column = new Utilities.Model.SQLite.TimeLine.column();
-				column.localId_ = row.localId.ToString();
-				column.enabled_ = row.enabled.ToString();
-				column.time_ = row.createdAt_;
-				column.text_ = row.content_;
-				timeLine_.update(column);
-			}
+			timeLine_.update(rows_);
 			base.OnPause();
 		}
 
