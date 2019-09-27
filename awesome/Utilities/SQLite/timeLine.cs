@@ -43,6 +43,11 @@ namespace awesome.Utilities.SQLite {
 			db.Insert(timelineModel_.tableName_, null, timelineModel_.insertEntry(_column));
 		}
 
+		public void update(Model.SQLite.TimeLine.column _column) {
+			var db = this.WritableDatabase;
+			db.Update(timelineModel_.tableName_, timelineModel_.updateEntry(_column), Model.SQLite.TimeLine.HEADER.localId_ + " == ?", new string[] {_column.localId_ });
+		}
+
 		public List<Utilities.Model.UI.timeLineRow> read() {
 			var db = ReadableDatabase;
 

@@ -47,6 +47,18 @@ namespace awesome.Utilities.Model.SQLite {
 			return values;
 		}
 
+		public ContentValues updateEntry(column _column) {
+			ContentValues values = new ContentValues();
+
+			values.Put("gId", _column.globalId_);
+			values.Put("Name", _column.name_);
+			values.Put("Time", _column.time_);
+			values.Put("Text", _column.text_);
+			values.Put("Enabled", _column.enabled_);
+
+			return values;
+		}
+
 		public string deleteEntry() {
 			return "drop table if exists " + tableName_;
 		}
