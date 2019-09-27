@@ -41,7 +41,7 @@ namespace awesome {
 			/// 起動時間的にも懸念事項となるので将来的に
 			/// は別のところで実行をする．
 			rows_ = new List<Utilities.Model.UI.timeLineRow>();
-			rows_.AddRange(timeLine_.read());
+			rows_.AddRange(timeLine_.search(_until:"2019-10-01", _from:"2019-09-26"));
 			adapter_ = new Adapter.timeLine(this, rows_);
 			manager_ = new LinearLayoutManager(this);
 			recycler.HasFixedSize = false;

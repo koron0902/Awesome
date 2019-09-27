@@ -50,8 +50,8 @@ namespace awesome.Utilities.SQLite {
 					Model.SQLite.TimeLine.HEADER.name_,
 					Model.SQLite.TimeLine.HEADER.text_,
 					Model.SQLite.TimeLine.HEADER.time_},
-				"Time < ?",
-				new string[] { "2019-09-27" },
+				null,
+				null,
 				null,
 				null,
 				null);
@@ -72,15 +72,28 @@ namespace awesome.Utilities.SQLite {
 		/// TODO:
 		/// Search系の関数を実装する．
 		/// Searchキーとしてのenumも実装の必要あり．
-		public List<Utilities.Model.UI.timeLineRow> search(string _date) {
+		public List<Utilities.Model.UI.timeLineRow> search(string _until = null, string _from = null) {
+			string query = null;
+			List<string> dataSet = new List<string>();
+
+			if(_until != null) {
+				query += query == null ? "date(Time) <= ?" : " and date(Time) <= ?";
+				dataSet.Add(_until);
+			}
+
+			if(_from != null) {
+				query += query == null ? "date(Time) >= ?" : " and date(Time) >= ?";
+				dataSet.Add(_from);
+			}
+
 			var db = ReadableDatabase;
 			var cursor = db.Query(timelineModel_.tableName_,
 				new string[] {
 					Model.SQLite.TimeLine.HEADER.name_,
 					Model.SQLite.TimeLine.HEADER.text_,
 					Model.SQLite.TimeLine.HEADER.time_},
-				null,
-				null,
+				query,
+				dataSet.Count == 0 ? null : dataSet.ToArray(),
 				null,
 				null,
 				null);
