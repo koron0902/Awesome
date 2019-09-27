@@ -36,19 +36,23 @@ namespace awesome {
 			timeLine_ = new Utilities.SQLite.TimeLine(ApplicationContext);
 			var recycler = FindViewById<RecyclerView>(Resource.Id.timeLine);
 
+			dateTime_ = DateTime.Today;
+			FindViewById<TextView>(Resource.Id.year).Text = dateTime_.Year.ToString("D4") + "年";
+			FindViewById<TextView>(Resource.Id.month).Text = dateTime_.Month.ToString("D2") + "月";
+			FindViewById<TextView>(Resource.Id.day).Text = dateTime_.Day.ToString("D2") + "日";
+
 			/// TODO:
 			/// onCreate()で重い処理を実行することは
 			/// 起動時間的にも懸念事項となるので将来的に
 			/// は別のところで実行をする．
 			rows_ = new List<Utilities.Model.UI.timeLineRow>();
-			rows_.AddRange(timeLine_.read());
+			rows_.AddRange(timeLine_.search(_at:dateTime_.ToLocalTime().ToString("yyyy-MM-dd")));
 			adapter_ = new Adapter.timeLine(this, rows_);
 			manager_ = new LinearLayoutManager(this);
 			recycler.HasFixedSize = false;
 			recycler.SetLayoutManager(manager_);
 			recycler.SetAdapter(adapter_);
 
-			dateTime_ = new DateTime(DateTime.Now.Millisecond);
 
 			FindViewById<RelativeLayout>(Resource.Id.date).Click += (sender, e) => {
 				var c = new Fragment.Calendar(this);
@@ -57,6 +61,9 @@ namespace awesome {
 					FindViewById<TextView>(Resource.Id.year).Text = dateTime_.Year.ToString("D4") + "年";
 					FindViewById<TextView>(Resource.Id.month).Text = dateTime_.Month.ToString("D2") + "月";
 					FindViewById<TextView>(Resource.Id.day).Text = dateTime_.Day.ToString("D2") + "日";
+					rows_.Clear();
+					rows_.AddRange(timeLine_.search(_at: dateTime_.ToLocalTime().ToString("yyyy-MM-dd")));
+					adapter_.NotifyDataSetChanged();
 				};
 				if(c != null) {
 					var manager = this.FragmentManager;
@@ -89,16 +96,16 @@ namespace awesome {
 					///  そのうちサーバにプッシュしてグローバルIDを取得するようにする．
 					///  IntentServiceあたりでいいかな．
 					var posted = data.GetStringExtra("POSTED_COMMENT");
-					var now = DateTime.Now.ToLocalTime().ToString("HH:mm:ss");
+					var dateTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
           
 					Utilities.Model.SQLite.TimeLine.column column = new Utilities.Model.SQLite.TimeLine.column();
 					column.name_ = "adad";
 					column.text_ = posted;
-					column.time_ = now;
+					column.time_ = dateTime;
 
 					timeLine_.write(column);
           
-					rows_.Add(new Utilities.Model.UI.timeLineRow(now, posted));
+					rows_.Add(new Utilities.Model.UI.timeLineRow(column.time_, column.text_));
 					adapter_.NotifyDataSetChanged();
 				}
 			}

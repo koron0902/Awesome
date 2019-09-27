@@ -44,6 +44,7 @@ namespace awesome.Utilities.SQLite {
 
 		public List<Utilities.Model.UI.timeLineRow> read() {
 			var db = ReadableDatabase;
+
 			var cursor = db.Query(timelineModel_.tableName_,
 				new string[] {
 					Model.SQLite.TimeLine.HEADER.name_,
@@ -71,5 +72,47 @@ namespace awesome.Utilities.SQLite {
 		/// TODO:
 		/// Search系の関数を実装する．
 		/// Searchキーとしてのenumも実装の必要あり．
+		public List<Utilities.Model.UI.timeLineRow> search(string _at = null, string _until = null, string _from = null) {
+			string query = null;
+			List<string> dataSet = new List<string>();
+
+			if(_at != null) {
+				query += query == null ? "date(Time) == ?" : " and date(Time) == ?";
+				dataSet.Add(_at);
+			} else { 
+				if(_until != null) {
+					query += query == null ? "date(Time) <= ?" : " and date(Time) <= ?";
+					dataSet.Add(_until);
+				}
+
+				if(_from != null) {
+					query += query == null ? "date(Time) >= ?" : " and date(Time) >= ?";
+					dataSet.Add(_from);
+				}
+			}
+
+			var db = ReadableDatabase;
+			var cursor = db.Query(timelineModel_.tableName_,
+				new string[] {
+					Model.SQLite.TimeLine.HEADER.name_,
+					Model.SQLite.TimeLine.HEADER.text_,
+					Model.SQLite.TimeLine.HEADER.time_},
+				query,
+				dataSet.Count == 0 ? null : dataSet.ToArray(),
+				null,
+				null,
+				null);
+
+
+			List<Model.UI.timeLineRow> row_ = new List<Model.UI.timeLineRow>();
+			cursor.MoveToFirst();
+			for(var i = 0;i < cursor.Count;i++) {
+				row_.Add(new Model.UI.timeLineRow(cursor.GetString(2), cursor.GetString(1)));
+				cursor.MoveToNext();
+			}
+			cursor.Close();
+
+			return row_;
+		}
 	}
 }
