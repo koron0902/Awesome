@@ -89,16 +89,16 @@ namespace awesome {
 					///  そのうちサーバにプッシュしてグローバルIDを取得するようにする．
 					///  IntentServiceあたりでいいかな．
 					var posted = data.GetStringExtra("POSTED_COMMENT");
-					var now = DateTime.Now.ToLocalTime().ToString("HH:mm:ss");
+					var dateTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
           
 					Utilities.Model.SQLite.TimeLine.column column = new Utilities.Model.SQLite.TimeLine.column();
 					column.name_ = "adad";
 					column.text_ = posted;
-					column.time_ = now;
+					column.time_ = dateTime;
 
 					timeLine_.write(column);
           
-					rows_.Add(new Utilities.Model.UI.timeLineRow(now, posted));
+					rows_.Add(new Utilities.Model.UI.timeLineRow(column.time_, column.text_));
 					adapter_.NotifyDataSetChanged();
 				}
 			}
