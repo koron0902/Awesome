@@ -42,5 +42,9 @@ namespace awesome.Utilities.Model.SQLite {
 
 			return values;
 		}
+
+		public string deleteEntry() {
+			return "drop table if exists " + tableName_;
+		}
 	}
 }

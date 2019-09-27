@@ -22,6 +22,7 @@ namespace awesome.Utilities.SQLite {
 		}
 
 		public override void OnUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+			db.ExecSQL(timelineModel_.deleteEntry());
 			OnCreate(db);
 		}
 
