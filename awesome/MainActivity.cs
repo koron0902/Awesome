@@ -57,6 +57,8 @@ namespace awesome {
 			FindViewById<RelativeLayout>(Resource.Id.date).Click += (sender, e) => {
 				var c = new Fragment.Calendar(this);
 				c.onDataSelectChanged += (e2) => {
+					timeLine_.update(rows_);
+
 					dateTime_ = e2.Date;
 					FindViewById<TextView>(Resource.Id.year).Text = dateTime_.Year.ToString("D4") + "年";
 					FindViewById<TextView>(Resource.Id.month).Text = dateTime_.Month.ToString("D2") + "月";
@@ -72,6 +74,11 @@ namespace awesome {
 					}
 				}
 			};
+		}
+
+		protected override void OnPause() {
+			timeLine_.update(rows_);
+			base.OnPause();
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu) {
@@ -102,6 +109,7 @@ namespace awesome {
 					column.name_ = "adad";
 					column.text_ = posted;
 					column.time_ = dateTime;
+					column.enabled_ = true.ToString();
 
 					timeLine_.write(column);
 
