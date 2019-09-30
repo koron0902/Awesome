@@ -12,19 +12,19 @@ using Android.App;
 using Android.Graphics;
 
 namespace awesome.Adapter {
-  public class timeLine : RecyclerView.Adapter {
-    List<awesome.Utilities.Model.UI.timeLineRow> rows_;
-    Activity activity_;
-    public timeLine(Activity _activity, List<Utilities.Model.UI.timeLineRow> _rows) {
-      activity_ = _activity;
-      rows_ = _rows;
-    }
+	public class timeLine : RecyclerView.Adapter {
+		List<awesome.Utilities.Model.UI.timeLineRow> rows_;
+		Activity activity_;
+		public timeLine(Activity _activity, List<Utilities.Model.UI.timeLineRow> _rows) {
+			activity_ = _activity;
+			rows_ = _rows;
+		}
 
-    public timeLine(Activity _activity) {
-      activity_ = _activity;
-    }
+		public timeLine(Activity _activity) {
+			activity_ = _activity;
+		}
 
-    public override int ItemCount => rows_.Count;
+		public override int ItemCount => rows_.Count;
 
     public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position) {
       ((ViewHolder.timeLine)(holder)).created_.Text = DateTime.Parse(rows_[position].createdAt_).ToString("HH:mm:ss");
@@ -82,15 +82,20 @@ namespace awesome.Adapter {
         new Handler().PostDelayed(() => {
           ((ViewGroup)tableLayout.Parent).RemoveView(tableLayout);
         }, 500);
+
+        activity_.RunOnUiThread(() =>
+        activity_.FindViewById<TextView>(Resource.Id.point).Text = (int.Parse(activity_.FindViewById<TextView>(Resource.Id.point).Text) + 1).ToString()
+        );
+
       };
     }
 
-    public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-      return new ViewHolder.timeLine(LayoutInflater
-            .From(parent.Context)
-            .Inflate(Resource.Layout.card,
-                parent,
-                false));
-    }
-  }
+		public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+			return new ViewHolder.timeLine(LayoutInflater
+						.From(parent.Context)
+						.Inflate(Resource.Layout.card,
+								parent,
+								false));
+		}
+	}
 }
