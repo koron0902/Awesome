@@ -57,7 +57,18 @@ namespace awesome {
       recycler.SetLayoutManager(manager_);
       recycler.SetAdapter(adapter_);
 
+      adapter_.onRowClicked += (_row) => {
+        point_++;
+        userInfo_.update(point_.ToString());
+        FindViewById<TextView>(Resource.Id.point).Text = point_.ToString();
+        timeLine_.update(_row);
+      };
+
       point_ = userInfo_.read();
+      if(point_ == -1) {
+        point_ = 0;
+        userInfo_.write();
+      }
       FindViewById<TextView>(Resource.Id.point).Text = point_.ToString();
 
 
