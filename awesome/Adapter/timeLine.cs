@@ -25,6 +25,7 @@ namespace awesome.Adapter {
 		}
 
 		public override int ItemCount => rows_.Count;
+    public Action<awesome.Utilities.Model.UI.timeLineRow> onRowClicked;
 
     public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position) {
       ((ViewHolder.timeLine)(holder)).created_.Text = DateTime.Parse(rows_[position].createdAt_).ToString("HH:mm:ss");
@@ -83,10 +84,7 @@ namespace awesome.Adapter {
           ((ViewGroup)tableLayout.Parent).RemoveView(tableLayout);
         }, 500);
 
-        activity_.RunOnUiThread(() =>
-        activity_.FindViewById<TextView>(Resource.Id.point).Text = (++MainActivity.point_).ToString()
-        );
-
+        onRowClicked(rows_[position]);
       };
     }
 
