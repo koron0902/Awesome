@@ -6,6 +6,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 	<android.support.design.widget.AppBarLayout
+		android:id="@+id/AppBarLayout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:theme="@style/AppTheme.AppBarOverlay">
@@ -44,12 +45,41 @@
 			</RelativeLayout>
 		</android.support.v7.widget.Toolbar>
 	</android.support.design.widget.AppBarLayout>
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/mainContent"
+		android:layout_marginTop="?android:attr/actionBarSize"
+	>
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/pointArea">
+		<ImageView
+			android:layout_width="20dp"
+			android:layout_height="20dp"
+			android:src="@drawable/coin"
+			android:id="@+id/coin"
+			android:layout_centerVertical="true"
+				android:layout_toLeftOf="@id/point"
+				android:layout_marginRight="5dp"/>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="0"
+			android:id="@+id/point"
+			android:layout_centerHorizontal="true"
+			android:gravity="center_vertical"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+		/>
+			</RelativeLayout>
 	<android.support.v7.widget.RecyclerView
 		android:id="@+id/timeLine"
-		android:layout_marginTop="?android:attr/actionBarSize"
+		android:layout_below="@id/pointArea"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		/>
+	</RelativeLayout>
 	<android.support.design.widget.FloatingActionButton
 		android:id="@+id/fab"
 		android:layout_width="wrap_content"
