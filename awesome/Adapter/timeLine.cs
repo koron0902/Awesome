@@ -84,7 +84,7 @@ namespace awesome.Adapter {
         }, 500);
 
         activity_.RunOnUiThread(() =>
-        activity_.FindViewById<TextView>(Resource.Id.point).Text = (int.Parse(activity_.FindViewById<TextView>(Resource.Id.point).Text) + 1).ToString()
+        activity_.FindViewById<TextView>(Resource.Id.point).Text = (++MainActivity.point_).ToString()
         );
 
       };

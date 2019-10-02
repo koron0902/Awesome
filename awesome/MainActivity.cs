@@ -15,10 +15,13 @@ namespace awesome {
   public class MainActivity : AppCompatActivity {
     static readonly int POST_REQUEST_CODE_ = 0x01;
     Utilities.SQLite.TimeLine timeLine_;
+    Utilities.SQLite.UserInfo userInfo_;
     List<Utilities.Model.UI.timeLineRow> rows_;
     Adapter.timeLine adapter_;
     LinearLayoutManager manager_;
     DateTime dateTime_;
+
+    public static int point_;
 
     protected override void OnCreate(Bundle savedInstanceState) {
       base.OnCreate(savedInstanceState);
@@ -34,6 +37,7 @@ namespace awesome {
       };
 
       timeLine_ = new Utilities.SQLite.TimeLine(ApplicationContext);
+      userInfo_ = new Utilities.SQLite.UserInfo(ApplicationContext);
       var recycler = FindViewById<RecyclerView>(Resource.Id.timeLine);
 
       dateTime_ = DateTime.Today;
@@ -52,6 +56,9 @@ namespace awesome {
       recycler.HasFixedSize = false;
       recycler.SetLayoutManager(manager_);
       recycler.SetAdapter(adapter_);
+
+      point_ = userInfo_.read();
+      FindViewById<TextView>(Resource.Id.point).Text = point_.ToString();
 
 
       FindViewById<RelativeLayout>(Resource.Id.date).Click += (sender, e) => {

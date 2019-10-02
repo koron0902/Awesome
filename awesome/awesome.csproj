@@ -69,6 +69,8 @@
     <Compile Include="Utilities\Model\UI\timeLineRow.cs" />
     <Compile Include="Utilities\Animation\Horizontal.cs" />
     <Compile Include="Fragment\Calendar.cs" />
+    <Compile Include="Utilities\SQLite\userInfo.cs" />
+    <Compile Include="Utilities\Model\SQLite\userInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
