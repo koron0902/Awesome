@@ -36,6 +36,13 @@ namespace awesome.Utilities.SQLite {
       base.OnConfigure(db);
     }
 
+    public void write() {
+      var db = this.WritableDatabase;
+      var value = new ContentValues();
+      value.Put(Model.SQLite.UserInfo.HEADER.point_, 0);
+      db.Insert(userInfoModel_.tableName_, null, value);
+    }
+
     public void update(string _point) {
       var db = this.WritableDatabase;
       var value = new ContentValues();
