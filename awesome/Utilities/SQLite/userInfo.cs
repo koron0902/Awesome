@@ -53,7 +53,7 @@ namespace awesome.Utilities.SQLite {
     public int read() {
       var db = this.ReadableDatabase;
       var cursor = db.Query(userInfoModel_.tableName_,
-        new string[] { Model.SQLite.UserInfo.HEADER.point_ },
+        new string[] { Model.SQLite.UserInfo.HEADER.point_, Model.SQLite.UserInfo.HEADER.id_ },
         "Id == ?",
         new string[] { "1" },
         null,
@@ -61,7 +61,7 @@ namespace awesome.Utilities.SQLite {
         null);
 
       cursor.MoveToFirst();
-      if(cursor.Count < 1) return 0;
+      if(cursor.Count < 1) return -1;
       var point = cursor.GetInt(0);
       cursor.Close();
 
