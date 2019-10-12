@@ -65,7 +65,7 @@ steps:
     script: |
       # Write your commands here
       /Library/Frameworks/Mono.framework/Versions/Current/bin/msbuild **/*.csproj \
-      -t:SignAndroidPackage\
+      -t:SignAndroidPackage \
       -p:Configuration=Release \
       -p:AndroidKeyStore=True \
       -p:AndroidSigningKeyStore=milkcocoa.keystore \
