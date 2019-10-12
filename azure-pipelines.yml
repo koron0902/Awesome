@@ -39,7 +39,7 @@ steps:
     targetType: 'inline'
     script: |
       # Write your commands here
-      /Library/Frameworks/Mono.framework/Versions/Current/bin/msbuild $(build.SourcesDirectory)/awesome/awesome.csproj 
+      /Library/Frameworks/Mono.framework/Versions/Current/bin/msbuild $(build.SourcesDirectory)/awesome/awesome.csproj \
       -t:SignAndroidPackage \
       -p:Configuration=$(buildConfiguration) \
       -p:AndroidKeyStore=True \
