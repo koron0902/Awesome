@@ -64,7 +64,7 @@ steps:
     targetType: 'inline'
     script: |
       # Write your commands here
-      /Library/Frameworks/Mono.framework/Versions/Current/bin/msbuild awesome.csproj \
+      /Library/Frameworks/Mono.framework/Versions/Current/bin/msbuild **/*.csproj \
       -t:SignAndroidPackage\
       -p:Configuration=Release \
       -p:AndroidKeyStore=True \
