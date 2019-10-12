@@ -57,11 +57,13 @@ steps:
     platform: 'Any CPU'
     configuration: 'Release'
     msbuildArguments: '-t:SignAndroidPackage  -p:Configuration=$(buildConfiguration) -p:AndroidKeyStore=True -p:AndroidSigningKeyStore=$(build.SourcesDirectory)/awesome/milkcocoa.keystore -p:AndroidSigningStorePass=koronAs0102054 -p:AndroidSigningKeyAlias=milkcocoa -p:AndroidSigningKeyPass=koronAs0102054'
+
 - task: Bash@3
   inputs:
+    targetType: 'inline'
     script: |
       echo '$(outputDirectory)'
-            ls $(outputDirectory)
+      ls $(outputDirectory)
 
 # Starting Android Emulator
 #- task: Bash@3
