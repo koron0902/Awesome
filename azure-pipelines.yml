@@ -39,12 +39,14 @@ steps:
     targetType: 'inline'
     script: |
       # Write your commands here
+      pwd
+      ls awesome
       /Library/Frameworks/Mono.framework/Versions/Current/bin/msbuild **/*.csproj \
       -t:SignAndroidPackage \
       -p:Configuration=$(buildConfiguration) \
       -p:AndroidPackageFormat=aab \
       -p:AndroidKeyStore=True \
-      -p:AndroidSigningKeyStore=milkcocoa.keystore \
+      -p:AndroidSigningKeyStore=awesome/milkcocoa.keystore \
       -p:AndroidSigningStorePass=koronAs0102054 \
       -p:AndroidSigningKeyAlias=milkcocoa \
       -p:AndroidSigningKeyPass=koronAs0102054
