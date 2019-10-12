@@ -52,7 +52,7 @@ steps:
 #      ls $(outputDirectory)
 - task: MSBuild@1
   inputs:
-    solution: '**/*.csproj'
+    solution: '**/*.sln'
     msbuildArchitecture: 'x64'
     platform: 'Any CPU'
     configuration: 'Release'
