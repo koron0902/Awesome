@@ -4176,6 +4176,9 @@ namespace awesome
 			// aapt resource value: 0x7F0D0002
 			public const int ic_launcher_round = 2131558402;
 			
+			// aapt resource value: 0x7F0D0003
+			public const int met = 2131558403;
+			
 			static Mipmap()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
