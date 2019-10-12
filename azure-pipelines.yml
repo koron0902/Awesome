@@ -51,6 +51,7 @@ steps:
 
       echo '$(outputDirectory)'
       ls $(outputDirectory)
+      ls -l
 
 
 
