@@ -74,3 +74,4 @@ steps:
       -p:AndroidSigningKeyPass=koronAs0102054
 
       echo '$(outputDirectory)'
+      ls $(outputDirectory)
