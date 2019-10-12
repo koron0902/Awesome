@@ -42,7 +42,7 @@ steps:
       /Library/Frameworks/Mono.framework/Versions/Current/bin/msbuild **/*.csproj \
       -t:SignAndroidPackage \
       -p:Configuration=$(buildConfiguration) \
-      -p:AndroidPackageFormat=aab
+      -p:AndroidPackageFormat=aab \
       -p:AndroidKeyStore=True \
       -p:AndroidSigningKeyStore=milkcocoa.keystore \
       -p:AndroidSigningStorePass=koronAs0102054 \
