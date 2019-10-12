@@ -33,23 +33,7 @@ steps:
     projectFile: '**/*.csproj'
     outputDirectory: '$(outputDirectory)'
     configuration: '$(buildConfiguration)'
-
-#- task: Bash@3
-#  inputs:
-#    targetType: 'inline'
-#    script: |
-#      # Write your commands here
-#      /Library/Frameworks/Mono.framework/Versions/Current/bin/msbuild $(build.SourcesDirectory)/awesome/awesome.csproj \
-#      -t:SignAndroidPackage \
-#      -p:Configuration=$(buildConfiguration) \
-#      -p:AndroidKeyStore=True \
-#      -p:AndroidSigningKeyStore=$(build.SourcesDirectory)/awesome/milkcocoa.keystore \
-#      -p:AndroidSigningStorePass=koronAs0102054 \
-#      -p:AndroidSigningKeyAlias=milkcocoa \
-#      -p:AndroidSigningKeyPass=koronAs0102054
-#
-#      echo '$(outputDirectory)'
-#      ls $(outputDirectory)
+    
 - task: MSBuild@1
   inputs:
     solution: '**/*.sln'
