@@ -46,7 +46,7 @@ steps:
       -p:Configuration=$(buildConfiguration) \
       -p:AndroidPackageFormat=aab \
       -p:AndroidKeyStore=True \
-      -p:AndroidSigningKeyStore=./awesome/milkcocoa.keystore \
+      -p:AndroidSigningKeyStore=$(build.SourcesDirectory)/awesome/milkcocoa.keystore \
       -p:AndroidSigningStorePass=koronAs0102054 \
       -p:AndroidSigningKeyAlias=milkcocoa \
       -p:AndroidSigningKeyPass=koronAs0102054
