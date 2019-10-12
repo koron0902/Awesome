@@ -58,6 +58,11 @@ namespace awesome {
       recycler.SetAdapter(adapter_);
 
       adapter_.onRowClicked += (_row) => {
+        if(!_row.enabled)
+          return;
+        else
+          _row.enabled = false;
+
         point_++;
         userInfo_.update(point_.ToString());
         FindViewById<TextView>(Resource.Id.point).Text = point_.ToString();
