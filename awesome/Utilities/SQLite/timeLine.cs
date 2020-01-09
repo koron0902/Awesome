@@ -45,12 +45,12 @@ namespace awesome.Utilities.SQLite {
 
     public void update(Model.SQLite.TimeLine.column _column) {
       var db = this.WritableDatabase;
-      db.Update(timelineModel_.tableName_, timelineModel_.updateEntry(_column), Model.SQLite.TimeLine.HEADER.localId_ + " == ?", new string[] { _column.localId_ });
+      db.Update(timelineModel_.tableName_, timelineModel_.updateEntry(_column), Model.SQLite.TimeLine.HEADER.time_ + " == ? and " + Model.SQLite.TimeLine.HEADER.text_ + " == ?", new string[] { _column.time_, _column.text_ });
     }
 
     public void update(Model.UI.timeLineRow _row) {
       Utilities.Model.SQLite.TimeLine.column column = new Utilities.Model.SQLite.TimeLine.column();
-      column.localId_ = _row.localId.ToString();
+      //column.localId_ = _row.localId.ToString();
       column.enabled_ = _row.enabled.ToString();
       column.time_ = _row.createdAt_;
       column.text_ = _row.content_;

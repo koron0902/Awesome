@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -8,17 +9,19 @@ using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using System.Collections.Generic;
 
 namespace awesome {
   [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
   public class MainActivity : AppCompatActivity {
     static readonly int POST_REQUEST_CODE_ = 0x01;
     Utilities.SQLite.TimeLine timeLine_;
+    Utilities.SQLite.UserInfo userInfo_;
     List<Utilities.Model.UI.timeLineRow> rows_;
     Adapter.timeLine adapter_;
     LinearLayoutManager manager_;
     DateTime dateTime_;
+
+    public static int point_;
 
     protected override void OnCreate(Bundle savedInstanceState) {
       base.OnCreate(savedInstanceState);
@@ -34,6 +37,7 @@ namespace awesome {
       };
 
       timeLine_ = new Utilities.SQLite.TimeLine(ApplicationContext);
+      userInfo_ = new Utilities.SQLite.UserInfo(ApplicationContext);
       var recycler = FindViewById<RecyclerView>(Resource.Id.timeLine);
 
       dateTime_ = DateTime.Today;
@@ -53,12 +57,29 @@ namespace awesome {
       recycler.SetLayoutManager(manager_);
       recycler.SetAdapter(adapter_);
 
+      adapter_.onRowClicked += (_row) => {
+        if(!_row.enabled)
+          return;
+        else
+          _row.enabled = false;
+
+        point_++;
+        userInfo_.update(point_.ToString());
+        FindViewById<TextView>(Resource.Id.point).Text = point_.ToString();
+        timeLine_.update(_row);
+      };
+
+      point_ = userInfo_.read();
+      if(point_ == -1) {
+        point_ = 0;
+        userInfo_.write();
+      }
+      FindViewById<TextView>(Resource.Id.point).Text = point_.ToString();
+
 
       FindViewById<RelativeLayout>(Resource.Id.date).Click += (sender, e) => {
         var c = new Fragment.Calendar(this);
         c.onDataSelectChanged += (e2) => {
-          timeLine_.update(rows_);
-
           dateTime_ = e2.Date;
           FindViewById<TextView>(Resource.Id.year).Text = dateTime_.Year.ToString("D4") + "年";
           FindViewById<TextView>(Resource.Id.month).Text = dateTime_.Month.ToString("D2") + "月";
@@ -77,7 +98,6 @@ namespace awesome {
     }
 
     protected override void OnPause() {
-      timeLine_.update(rows_);
       base.OnPause();
     }
 

@@ -12,25 +12,27 @@ using Android.App;
 using Android.Graphics;
 
 namespace awesome.Adapter {
-  public class timeLine : RecyclerView.Adapter {
-    List<awesome.Utilities.Model.UI.timeLineRow> rows_;
-    Activity activity_;
-    public timeLine(Activity _activity, List<Utilities.Model.UI.timeLineRow> _rows) {
-      activity_ = _activity;
-      rows_ = _rows;
-    }
+	public class timeLine : RecyclerView.Adapter {
+		List<awesome.Utilities.Model.UI.timeLineRow> rows_;
+		Activity activity_;
+		public timeLine(Activity _activity, List<Utilities.Model.UI.timeLineRow> _rows) {
+			activity_ = _activity;
+			rows_ = _rows;
+		}
 
-    public timeLine(Activity _activity) {
-      activity_ = _activity;
-    }
+		public timeLine(Activity _activity) {
+			activity_ = _activity;
+		}
 
-    public override int ItemCount => rows_.Count;
+		public override int ItemCount => rows_.Count;
+    public Action<awesome.Utilities.Model.UI.timeLineRow> onRowClicked;
 
     public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position) {
       ((ViewHolder.timeLine)(holder)).created_.Text = DateTime.Parse(rows_[position].createdAt_).ToString("HH:mm:ss");
       ((ViewHolder.timeLine)(holder)).content_.Text = rows_[position].content_;
       ((ViewHolder.timeLine)(holder)).content_.Enabled = rows_[position].enabled;
       ((ViewHolder.timeLine)(holder)).content_.Click += (sender, e) => {
+        
         TableLayout tableLayout = new TableLayout(activity_.ApplicationContext);
         tableLayout.SetGravity(GravityFlags.Bottom | GravityFlags.CenterHorizontal);
         tableLayout.SetBackgroundColor(Color.Argb(100, 160, 160, 160));
@@ -75,22 +77,22 @@ namespace awesome.Adapter {
         };
 
 
-        ((Android.Widget.TextView)sender).Enabled = false;
-        rows_[position].enabled = false;
-
-
         new Handler().PostDelayed(() => {
           ((ViewGroup)tableLayout.Parent).RemoveView(tableLayout);
         }, 500);
+
+        onRowClicked(rows_[position]);
+        ((Android.Widget.TextView)sender).Enabled = false;
+        rows_[position].enabled = false;
       };
     }
 
-    public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-      return new ViewHolder.timeLine(LayoutInflater
-            .From(parent.Context)
-            .Inflate(Resource.Layout.card,
-                parent,
-                false));
-    }
-  }
+		public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+			return new ViewHolder.timeLine(LayoutInflater
+						.From(parent.Context)
+						.Inflate(Resource.Layout.card,
+								parent,
+								false));
+		}
+	}
 }
