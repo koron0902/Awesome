@@ -9,6 +9,7 @@ namespace awesome.ViewHolder {
     public TextView created_;
     public TextView content_;
     public bool enabled = true;
+    public string id = "";
 
     public timeLine(View itemView) : base(itemView) {
       created_ = itemView.FindViewById<TextView>(Resource.Id.postedTime);

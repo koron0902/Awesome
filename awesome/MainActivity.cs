@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -126,6 +128,7 @@ namespace awesome {
           var dateTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
 
           Utilities.Model.SQLite.TimeLine.column column = new Utilities.Model.SQLite.TimeLine.column();
+          column.localId_ = dateTime.GetHashCode().ToString("X") + posted.GetHashCode().ToString("X");
           column.name_ = "adad";
           column.text_ = posted;
           column.time_ = dateTime;
@@ -134,7 +137,7 @@ namespace awesome {
           timeLine_.write(column);
 
           if(dateTime.Split(' ')[0] == dateTime_.Date.ToString("yyyy-MM-dd")) {
-            rows_.Add(new Utilities.Model.UI.timeLineRow(column.time_, column.text_));
+            rows_.Add(new Utilities.Model.UI.timeLineRow(column.time_, column.text_, column.localId_));
             adapter_.NotifyDataSetChanged();
           }
         }

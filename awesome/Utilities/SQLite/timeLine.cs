@@ -9,8 +9,8 @@ using Android.Runtime;
 
 namespace awesome.Utilities.SQLite {
   public class TimeLine : SQLiteOpenHelper {
-    private static int databaseVersion_ => 4;
-    private static string databaseName_ => "Awesome.db";
+    private static int databaseVersion_ => 1;
+    private static string databaseName_ => "timeline.db";
     private Model.SQLite.TimeLine timelineModel_;
 
     public TimeLine(Context _context) : base(_context, databaseName_, null, databaseVersion_) {
@@ -45,12 +45,12 @@ namespace awesome.Utilities.SQLite {
 
     public void update(Model.SQLite.TimeLine.column _column) {
       var db = this.WritableDatabase;
-      db.Update(timelineModel_.tableName_, timelineModel_.updateEntry(_column), Model.SQLite.TimeLine.HEADER.time_ + " == ? and " + Model.SQLite.TimeLine.HEADER.text_ + " == ?", new string[] { _column.time_, _column.text_ });
+      db.Update(timelineModel_.tableName_, timelineModel_.updateEntry(_column), Model.SQLite.TimeLine.HEADER.localId_ + " == ? ", new string[] { _column.localId_});
     }
 
     public void update(Model.UI.timeLineRow _row) {
       Utilities.Model.SQLite.TimeLine.column column = new Utilities.Model.SQLite.TimeLine.column();
-      //column.localId_ = _row.localId.ToString();
+      column.localId_ = _row.localId;
       column.enabled_ = _row.enabled.ToString();
       column.time_ = _row.createdAt_;
       column.text_ = _row.content_;
@@ -83,7 +83,7 @@ namespace awesome.Utilities.SQLite {
       List<Model.UI.timeLineRow> row_ = new List<Model.UI.timeLineRow>();
       cursor.MoveToFirst();
       for(var i = 0;i < cursor.Count;i++) {
-        row_.Add(new Model.UI.timeLineRow(cursor.GetString(2), cursor.GetString(1), cursor.GetInt(3), bool.Parse(cursor.GetString(4))));
+        row_.Add(new Model.UI.timeLineRow(cursor.GetString(2), cursor.GetString(1), cursor.GetString(3), bool.Parse(cursor.GetString(4))));
         cursor.MoveToNext();
       }
       cursor.Close();
@@ -132,7 +132,7 @@ namespace awesome.Utilities.SQLite {
       List<Model.UI.timeLineRow> row_ = new List<Model.UI.timeLineRow>();
       cursor.MoveToFirst();
       for(var i = 0;i < cursor.Count;i++) {
-        row_.Add(new Model.UI.timeLineRow(cursor.GetString(2), cursor.GetString(1), cursor.GetInt(3), bool.Parse(cursor.GetString(4))));
+        row_.Add(new Model.UI.timeLineRow(cursor.GetString(2), cursor.GetString(1), cursor.GetString(3), bool.Parse(cursor.GetString(4))));
         cursor.MoveToNext();
       }
       cursor.Close();

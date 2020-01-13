@@ -9,8 +9,8 @@ using Android.Runtime;
 
 namespace awesome.Utilities.SQLite {
   public class UserInfo : SQLiteOpenHelper {
-    private static int databaseVersion_ => 2;
-    private static string databaseName_ => "Awesome_UserInfo.db";
+    private static int databaseVersion_ => 1;
+    private static string databaseName_ => "userinfo.db";
     private Model.SQLite.UserInfo userInfoModel_;
 
     public UserInfo(Context _context): base(_context, databaseName_, null, databaseVersion_) {
