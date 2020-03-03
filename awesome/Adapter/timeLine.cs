@@ -31,6 +31,7 @@ namespace awesome.Adapter {
       ((ViewHolder.timeLine)(holder)).created_.Text = DateTime.Parse(rows_[position].createdAt_).ToString("HH:mm:ss");
       ((ViewHolder.timeLine)(holder)).content_.Text = rows_[position].content_;
       ((ViewHolder.timeLine)(holder)).content_.Enabled = rows_[position].enabled;
+      ((ViewHolder.timeLine)(holder)).id = rows_[position].localId;
       ((ViewHolder.timeLine)(holder)).content_.Click += (sender, e) => {
         
         TableLayout tableLayout = new TableLayout(activity_.ApplicationContext);

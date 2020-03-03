@@ -29,7 +29,7 @@ namespace awesome.Utilities.Model.SQLite {
     public string createEntry() {
       return "create table " + tableName_ + " (" +
         HEADER.globalId_ + " integer," +
-        HEADER.localId_ + " integer primary key autoincrement," +
+        HEADER.localId_ + " text not null," +
         HEADER.name_ + " text," +
         HEADER.time_ + " text," +
         HEADER.text_ + " text," +
@@ -39,6 +39,7 @@ namespace awesome.Utilities.Model.SQLite {
     public ContentValues insertEntry(column _column) {
       ContentValues values = new ContentValues();
       values.Put("gId", _column.globalId_);
+      values.Put("lId", _column.localId_);
       values.Put("Name", _column.name_);
       values.Put("Time", _column.time_);
       values.Put("Text", _column.text_);
@@ -51,6 +52,7 @@ namespace awesome.Utilities.Model.SQLite {
       ContentValues values = new ContentValues();
 
       values.Put("gId", _column.globalId_);
+      values.Put("lId", _column.localId_);
       values.Put("Name", _column.name_);
       values.Put("Time", _column.time_);
       values.Put("Text", _column.text_);
